@@ -1,0 +1,25 @@
+﻿<aside id="sidebar" class="bg-side-nav w-1/2 md:w-1/6 lg:w-1/6 border-r border-side-nav hidden md:block lg:block">
+    <ul class="list-reset flex flex-col">
+        <li class=" w-full h-full py-3 px-2 border-b border-light-border bg-white">
+            <NavLink class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline"
+                     href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Dashboard
+            </NavLink>
+        </li>
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <li class=" w-full h-full py-3 px-2 border-b border-light-border bg-white">
+                    <NavLink class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline" href="events/all">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> View Events
+                    </NavLink>
+                </li>
+                <li class=" w-full h-full py-3 px-2 border-b border-light-border bg-white">
+                    <NavLink class="font-sans font-hairline hover:font-normal text-sm text-nav-item no-underline" href="event/create">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Create Event
+                    </NavLink>
+                </li>
+            </Authorized>
+        </AuthorizeView>
+    </ul>
+</aside>
+<!--/Sidebar-->

@@ -1,0 +1,43 @@
+﻿@page "/account/login"
+
+<div class="container mx-auto h-full flex flex-1 justify-center items-center bg-cover bg-black-300">
+    <div class="w-full max-w-lg">
+        <div class="leading-loose">
+            <di class="max-w-xl m-4 p-10 rounded shadow-xl">
+                <h1>Login</h1>
+
+                @if (accountState.Value.IsLoading)
+                {
+                    <p>Logging in...</p>
+                }
+                else if (!string.IsNullOrEmpty(accountState.Value.Message))
+                {
+                    <p class="bg-green">Success: @accountState.Value.Message</p>
+                }
+
+                <EditForm Model=@loginModel OnValidSubmit=@HandleSubmit>
+                    <DataAnnotationsValidator />
+
+                    <div class="">
+                        <label class="block text-sm text-gray-00" for="email">Email</label>
+                        <InputText class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" placeholder="Your Email" id="email" aria-label="Email" @bind-Value="loginModel.Email" />
+                        <ValidationMessage For="@(() => loginModel.Email)" />
+                    </div>
+
+                    <div class="">
+                        <label class="block text-sm text-gray-00" for="password">Password</label>
+                        <InputText class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded" type="password" id="password" aria-label="Password" @bind-Value="loginModel.Password" />
+                        <ValidationMessage For="@(() => loginModel.Password)" />
+                    </div>
+
+                    <div class="mt-4">
+                        <button disabled="@accountState.Value.IsLoading" class="bg-blue-500 hover:bg-blue-700 text-whit py-2 px-4 rounded" type="submit">Login</button>
+                        Don't have an account ? <a class="inline-block right-0 align-baseline font-bold text-sm text-500 hover:text-blue-800" href="account/register">
+                            Register
+                        </a>
+                    </div>
+                </EditForm>
+            </di>
+        </div>
+    </div>
+</div>

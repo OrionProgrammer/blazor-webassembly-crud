@@ -1,0 +1,37 @@
+﻿@using EventSystem.Model;
+
+<!--Top user 1-->
+<div class="rounded rounded-t-lg overflow-hidden shadow max-w-xs my-5" style="border: 1px solid #ddd">
+    <img src="./images/event.jpg" alt="" class="w-full" />
+    <div class="flex justify-center -mt-8">
+        <img src="./images/icon1.png" alt=""
+             class="rounded-full border-solid border-white border-2 -mt-3">
+    </div>
+    <div class="text-center px-3 pb-6 pt-2">
+        <h1 class="text-white bold font-sans">@EventModel.Name</h1>
+        <p class="mt-2 font-sans font-light text-grey-700">
+            @EventModel.Description
+        </p>
+    </div>
+    <div class="flex justify-center pb-3 text-grey-dark">
+        <div class="text-center mr-3 border-r pr-3">
+            <h2>@EventModel.AttendanceCount</h2>
+            <span>Attending</span>
+        </div>
+        <div class="text-center">
+            <h2>@(EventModel.SeatCount - EventModel.AttendanceCount)</h2>
+            <span>Seats Left</span>
+        </div>
+    </div>
+    <div class="flex justify-center pb-3 nt-3 text-grey-dark">
+        <div class="text-center">
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+               href="@("/event/register/" + EventModel.Id)">View Details</a>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    [Parameter] public EventModel EventModel { get; set; }
+}

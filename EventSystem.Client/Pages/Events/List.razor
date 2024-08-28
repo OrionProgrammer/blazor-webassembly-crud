@@ -1,0 +1,44 @@
+﻿@page "/events/all"
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="p-3">
+
+    <h3>Event List</h3>
+
+    <hr />
+    <br /><br />
+    @if (eventState.Value.IsLoading)
+    {
+        <p>Loading events...</p>
+    }
+    else if (eventState.Value.Events == null || !eventState.Value.Events.Any())
+    {
+        <p>No events available.</p>
+    }
+    else
+    {
+        <input type="text" @bind="SearchTerm" placeholder="Search events..." class="form-control mb-3" />
+
+        <QuickGrid Items="@FilteredEvents"
+                   TotalItems="@eventState.Value.Events.Count()"
+                   Pageable="true"
+                   PageSize="10"
+                   CurrentPage="@CurrentPage"
+                   TotalItemCount="@FilteredEvents.Count()"
+                   OnPageChanged="@HandlePageChanged"
+                   Sortable="true"
+                   @bind-SortExpression="@SortExpression"
+                   @bind-SortDirection="@SortDirection"
+                   Virtualize=true
+                   class="w-full border border-gray-300 rounded-lg shadow-lg">
+            <PropertyColumn Title="Name" Property="@(e => e.Name)" Sortable=true />
+            <PropertyColumn Title="Location" Property="@(e => e.Location)" Sortable=true />
+            <PropertyColumn Title="Seats" Property="@(e => e.SeatCount)" Sortable=true />
+            <PropertyColumn Title="Attendance" Property="@(e => e.AttendanceCount)" Sortable=true />
+            <TemplateColumn Context="eventModel">
+                    <button onclick="@(() => Delete(eventModel.Id))"
+                        class="bg-red-500 text-white font-bold py-1 px-2 rounded hover:bg-red-700">Delete</button>
+            </TemplateColumn>
+        </QuickGrid>
+    }
+</div>

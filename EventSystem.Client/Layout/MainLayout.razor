@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+<!--Container -->
+<div class="mx-auto bg-black-300">
+    <!--Screen-->
+    <div class="min-h-screen flex flex-col">
+        <HeaderBar />
+
+        <div class="flex flex-1">
+            <NavMenu />
+            <!--Main-->
+            <main class="bg-black-900 flex-1 p-3 overflow-hidden text-white" style="background-color:#0d0c0c">
+                <div class="flex flex-col">
+                    @Body
+                </div>
+            </main>
+            <!--/Main-->
+        </div>
+
+        <!--Footer-->
+        <footer class="bg-grey-darkest text-white p-2">
+            <div class="flex flex-1 mx-auto">&copy; Event System</div>
+        </footer>
+        <!--/footer-->
+    </div>
+</div>

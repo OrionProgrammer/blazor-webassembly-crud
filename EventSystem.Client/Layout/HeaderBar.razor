@@ -1,0 +1,43 @@
+﻿@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
+
+<header class="bg-nav bg-grey-darkest">
+    <div class="flex justify-between">
+        <div class="p-1 mx-3 inline-flex items-center">
+            <h1 class="text-white p-2">
+                <a href="./">Event System</a>
+            </h1>
+        </div>
+        <div class="p-1 flex flex-row items-center">
+            <AuthorizeView>
+                <Authorized>
+                    <span class="text-white p-2 md:block lg:block">@context?.User?.Identity?.Name</span>
+                    <a href="#" @onclick="@Logout" @onclick:preventDefault class="text-white p-2 no-underline md:block lg:block">
+                        [Logout]
+                    </a>
+                </Authorized>
+                <NotAuthorized>
+                    <span class="text-white p-2 md:block lg:block">Guest</span>
+                    <a href="./account/login" class="text-white p-2 no-underline md:block lg:block">
+                        [Login]
+                    </a>
+                    <a href="./account/register" class="text-white p-2 no-underline md:block lg:block">
+                        [Register]
+                    </a>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </div>
+</header>
+<!--/Header-->
+
+
+@code{
+    public async void Logout()
+    {
+        //reove session variables and redirect to home page
+        var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+        await customAuthStateProvider.UpdateAuthenticationState(null);
+        navManager.NavigateTo("./account/login", true);
+    }
+}

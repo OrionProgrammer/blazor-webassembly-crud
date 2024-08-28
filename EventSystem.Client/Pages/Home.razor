@@ -1,0 +1,27 @@
+﻿@page "/"
+@using EventSystem.Client.Pages.Events.Components
+
+<PageTitle>Home</PageTitle>
+
+<h1>Upcomming Events..</h1>
+
+@if (events == null)
+{
+    <p>Loading...</p>
+}
+else if (!events.Any())
+{
+    <p>No events available.</p>
+}
+else
+{
+    <!--Profile Tabs-->
+    <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2 p-1 mt-2 mx-auto lg:mx-2 md:mx-2 justify-between">
+        @foreach (var eventModel in events)
+        {
+            <EventCard EventModel="eventModel" />
+        }
+    </div>
+}
+
+

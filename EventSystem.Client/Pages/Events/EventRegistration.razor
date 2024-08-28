@@ -1,0 +1,27 @@
+﻿@page "/event/register/{eventId:int}"
+@attribute [Authorize(Roles = "Admin, User")]
+
+<h1 class="py-2 px-4 ">@eventModel.Name</h1>
+<h3 class="py-2 px-4 ">@eventModel.Location</h3>
+<p class="py-2 px-4 ">@eventModel.Description</p>
+
+<p class="py-2 px-4 ">No of people attending: @eventModel.AttendanceCount</p>
+
+<p class="py-2 px-4 ">No of seats availale: @(eventModel.SeatCount - eventModel.AttendanceCount)</p>
+
+@if (!isRegistered)
+{
+    <div class="md:w-2/3">
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onclick="@(() => RegisterForEvent())">
+    Register
+    </button>
+    </div>
+}
+else
+{
+    <h5 class="py-2 px-4 ">
+        @message
+    </h5>
+}
+
